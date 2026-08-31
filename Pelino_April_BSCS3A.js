@@ -1,4 +1,4 @@
-let schoolName = "Calbayog City National High School";
+let schoolName = "CCNHS";
 let schoolYear = 2026;
 let passingGrade = 75;
 

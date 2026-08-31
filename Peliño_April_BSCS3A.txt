@@ -1,0 +1,582 @@
+import React from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  StatusBar,
+} from 'react-native';
+
+export default function App() {
+  return (
+    <SafeAreaView style={styles.safe}>
+      <StatusBar barStyle="dark-content" backgroundColor="#F7F8FC" />
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+
+          {/* Header */}
+          <View style={styles.header}>
+            <View>
+              <Text style={styles.greeting}>Good morning,</Text>
+              <Text style={styles.name}>April 👋</Text>
+            </View>
+
+            <TouchableOpacity style={styles.notification}>
+              <Text style={styles.notificationIcon}>🔔</Text>
+              <View style={styles.dot} />
+            </TouchableOpacity>
+          </View>
+
+          {/* Balance Card */}
+          <View style={styles.balanceCard}>
+            <View style={styles.cardTop}>
+              <Text style={styles.cardLabel}>TOTAL BALANCE</Text>
+              <Text style={styles.cardIcon}>◈</Text>
+            </View>
+
+            <Text style={styles.balance}>₱24,680.50</Text>
+
+            <View style={styles.cardBottom}>
+              <View>
+                <Text style={styles.smallLabel}>THIS MONTH</Text>
+                <Text style={styles.income}>+ ₱8,450.00</Text>
+              </View>
+
+              <View style={styles.progress}>
+                <View style={styles.progressFill} />
+              </View>
+            </View>
+          </View>
+
+          {/* Quick Actions */}
+          <Text style={styles.sectionTitle}>Quick actions</Text>
+
+          <View style={styles.actions}>
+            <Action icon="＋" label="Add money" />
+            <Action icon="↗" label="Send" />
+            <Action icon="↙" label="Request" />
+            <Action icon="•••" label="More" />
+          </View>
+
+          {/* Spending Overview */}
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Spending overview</Text>
+
+            <TouchableOpacity>
+              <Text style={styles.viewAll}>View details</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.spendingCard}>
+            <View style={styles.chartRow}>
+              <View>
+                <Text style={styles.spendingAmount}>₱6,320</Text>
+                <Text style={styles.muted}>Spent this month</Text>
+              </View>
+
+              <View style={styles.percentBadge}>
+                <Text style={styles.percentText}>↓ 8.4%</Text>
+              </View>
+            </View>
+
+            {/* Simple Bar Chart */}
+            <View style={styles.chart}>
+              <View style={[styles.bar, { height: 45 }]} />
+              <View style={[styles.bar, { height: 70 }]} />
+              <View style={[styles.bar, { height: 55 }]} />
+              <View style={[styles.bar, { height: 92 }]} />
+              <View style={[styles.bar, { height: 64 }]} />
+              <View style={[styles.bar, styles.activeBar, { height: 112 }]} />
+              <View style={[styles.bar, { height: 78 }]} />
+            </View>
+
+            <View style={styles.days}>
+              {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, index) => (
+                <Text
+                  key={index}
+                  style={[styles.day, index === 5 && styles.activeDay]}
+                >
+                  {day}
+                </Text>
+              ))}
+            </View>
+          </View>
+
+          {/* Recent Activity */}
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Recent activity</Text>
+
+            <TouchableOpacity>
+              <Text style={styles.viewAll}>See all</Text>
+            </TouchableOpacity>
+          </View>
+
+          <Activity
+            icon="🛒"
+            title="Grocery shopping"
+            date="Today, 9:42 AM"
+            amount="- ₱1,240"
+          />
+
+          <Activity
+            icon="☕"
+            title="Coffee shop"
+            date="Yesterday, 4:18 PM"
+            amount="- ₱185"
+          />
+
+          <Activity
+            icon="💳"
+            title="Cash in"
+            date="Sep 21, 10:05 AM"
+            amount="+ ₱5,000"
+            positive
+          />
+
+          <View style={styles.bottomSpace} />
+        </View>
+      </ScrollView>
+
+      {/* Bottom Navigation */}
+      <View style={styles.nav}>
+        <NavItem icon="⌂" label="Home" active />
+        <NavItem icon="◫" label="Activity" />
+        <NavItem icon="＋" label="Add" center />
+        <NavItem icon="▱" label="Cards" />
+        <NavItem icon="☺" label="Profile" />
+      </View>
+    </SafeAreaView>
+  );
+}
+
+function Action({ icon, label }) {
+  return (
+    <TouchableOpacity style={styles.action}>
+      <View style={styles.actionIcon}>
+        <Text style={styles.actionIconText}>{icon}</Text>
+      </View>
+
+      <Text style={styles.actionLabel}>{label}</Text>
+    </TouchableOpacity>
+  );
+}
+
+function Activity({ icon, title, date, amount, positive }) {
+  return (
+    <View style={styles.activity}>
+      <View style={styles.activityIcon}>
+        <Text style={styles.activityEmoji}>{icon}</Text>
+      </View>
+
+      <View style={styles.activityInfo}>
+        <Text style={styles.activityTitle}>{title}</Text>
+        <Text style={styles.activityDate}>{date}</Text>
+      </View>
+
+      <Text
+        style={[
+          styles.activityAmount,
+          positive && styles.positive,
+        ]}
+      >
+        {amount}
+      </Text>
+    </View>
+  );
+}
+
+function NavItem({ icon, label, active, center }) {
+  return (
+    <TouchableOpacity style={styles.navItem}>
+      <View
+        style={[
+          styles.navIcon,
+          active && styles.navIconActive,
+          center && styles.navCenter,
+        ]}
+      >
+        <Text
+          style={[
+            styles.navIconText,
+            active && styles.navActiveText,
+          ]}
+        >
+          {icon}
+        </Text>
+      </View>
+
+      <Text
+        style={[
+          styles.navLabel,
+          active && styles.navActiveText,
+        ]}
+      >
+        {label}
+      </Text>
+    </TouchableOpacity>
+  );
+}
+
+const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: '#F7F8FC',
+  },
+
+  container: {
+    paddingHorizontal: 22,
+    paddingTop: 18,
+  },
+
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+
+  greeting: {
+    fontSize: 14,
+    color: '#8A8F9C',
+    marginBottom: 3,
+  },
+
+  name: {
+    fontSize: 27,
+    fontWeight: '800',
+    color: '#171A24',
+  },
+
+  notification: {
+    width: 48,
+    height: 48,
+    borderRadius: 16,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 2,
+  },
+
+  notificationIcon: {
+    fontSize: 21,
+  },
+
+  dot: {
+    position: 'absolute',
+    right: 11,
+    top: 10,
+    width: 7,
+    height: 7,
+    borderRadius: 4,
+    backgroundColor: '#6C5CE7',
+    borderWidth: 1,
+    borderColor: '#FFF',
+  },
+
+  balanceCard: {
+    backgroundColor: '#242046',
+    borderRadius: 25,
+    padding: 22,
+    minHeight: 185,
+    marginBottom: 26,
+  },
+
+  cardTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  cardLabel: {
+    color: '#B9B4D8',
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 1.2,
+  },
+
+  cardIcon: {
+    color: '#FFFFFF',
+    fontSize: 22,
+  },
+
+  balance: {
+    color: '#FFFFFF',
+    fontSize: 33,
+    fontWeight: '800',
+    marginTop: 17,
+  },
+
+  cardBottom: {
+    marginTop: 22,
+  },
+
+  smallLabel: {
+    color: '#A9A5C7',
+    fontSize: 9,
+    fontWeight: '700',
+  },
+
+  income: {
+    color: '#FFFFFF',
+    fontSize: 13,
+    fontWeight: '700',
+    marginTop: 3,
+  },
+
+  progress: {
+    height: 4,
+    backgroundColor: '#454064',
+    borderRadius: 3,
+    marginTop: 10,
+  },
+
+  progressFill: {
+    width: '67%',
+    height: 4,
+    borderRadius: 3,
+    backgroundColor: '#A99BFF',
+  },
+
+  sectionTitle: {
+    color: '#171A24',
+    fontSize: 18,
+    fontWeight: '800',
+  },
+
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 16,
+    marginBottom: 28,
+  },
+
+  action: {
+    alignItems: 'center',
+    width: '24%',
+  },
+
+  actionIcon: {
+    width: 55,
+    height: 55,
+    borderRadius: 18,
+    backgroundColor: '#EDEBFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  actionIconText: {
+    color: '#6557D8',
+    fontSize: 24,
+    fontWeight: '600',
+  },
+
+  actionLabel: {
+    color: '#555A68',
+    fontSize: 11,
+    fontWeight: '600',
+    marginTop: 8,
+  },
+
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 13,
+  },
+
+  viewAll: {
+    color: '#6659D9',
+    fontSize: 11,
+    fontWeight: '700',
+  },
+
+  spendingCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 22,
+    padding: 18,
+    marginBottom: 27,
+    elevation: 1,
+  },
+
+  chartRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  spendingAmount: {
+    fontSize: 23,
+    fontWeight: '800',
+    color: '#171A24',
+  },
+
+  muted: {
+    color: '#989CA8',
+    fontSize: 11,
+    marginTop: 3,
+  },
+
+  percentBadge: {
+    backgroundColor: '#EAF7EF',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 10,
+  },
+
+  percentText: {
+    color: '#31925B',
+    fontSize: 11,
+    fontWeight: '800',
+  },
+
+  chart: {
+    height: 125,
+    marginTop: 15,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-around',
+    borderBottomWidth: 1,
+    borderBottomColor: '#EEF0F4',
+  },
+
+  bar: {
+    width: 22,
+    backgroundColor: '#E5E3F7',
+    borderRadius: 8,
+  },
+
+  activeBar: {
+    backgroundColor: '#7163DF',
+  },
+
+  days: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 9,
+  },
+
+  day: {
+    color: '#A1A5B0',
+    fontSize: 10,
+    fontWeight: '600',
+  },
+
+  activeDay: {
+    color: '#6659D9',
+    fontWeight: '800',
+  },
+
+  activity: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 18,
+    padding: 13,
+    marginBottom: 10,
+  },
+
+  activityIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 14,
+    backgroundColor: '#F1F0FA',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  activityEmoji: {
+    fontSize: 20,
+  },
+
+  activityInfo: {
+    flex: 1,
+    marginLeft: 12,
+  },
+
+  activityTitle: {
+    color: '#252833',
+    fontSize: 13,
+    fontWeight: '700',
+  },
+
+  activityDate: {
+    color: '#A0A3AD',
+    fontSize: 10,
+    marginTop: 4,
+  },
+
+  activityAmount: {
+    color: '#242631',
+    fontSize: 12,
+    fontWeight: '800',
+  },
+
+  positive: {
+    color: '#31925B',
+  },
+
+  bottomSpace: {
+    height: 95,
+  },
+
+  nav: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 76,
+    backgroundColor: '#FFFFFF',
+    borderTopWidth: 1,
+    borderTopColor: '#ECEEF3',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingHorizontal: 5,
+  },
+
+  navItem: {
+    alignItems: 'center',
+    width: 62,
+  },
+
+  navIcon: {
+    width: 34,
+    height: 28,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  navIconActive: {
+    backgroundColor: '#EDEBFF',
+  },
+
+  navCenter: {
+    width: 44,
+    height: 44,
+    borderRadius: 16,
+    backgroundColor: '#7163DF',
+    marginTop: -22,
+    borderWidth: 5,
+    borderColor: '#F7F8FC',
+  },
+
+  navIconText: {
+    fontSize: 19,
+    color: '#A0A4AF',
+  },
+
+  navActiveText: {
+    color: '#6659D9',
+    fontWeight: '800',
+  },
+
+  navLabel: {
+    color: '#A0A4AF',
+    fontSize: 9,
+    marginTop: 3,
+    fontWeight: '600',
+  },
+});
