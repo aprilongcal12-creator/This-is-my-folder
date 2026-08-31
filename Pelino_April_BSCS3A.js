@@ -2,7 +2,7 @@ let schoolName = "CCNHS";
 let schoolYear = 2026;
 let passingGrade = 75;
 
-let students = ["April", "Kent", "Vanna"];
+let students = ["April", "Kringo", "Vanna"];
 let subjects = ["Math", "Science", "English"];
 let grades = [85, 72, 90];
 
