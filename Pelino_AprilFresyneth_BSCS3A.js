@@ -1,5 +1,5 @@
 // Variables
-let city = "Calbayoggit ";
+let city = "Calbayog";
 let temperature = 30;
 let hasWifi = true;
 
