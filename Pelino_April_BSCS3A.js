@@ -4,7 +4,7 @@ let passingGrade = 75;
 
 let students = ["April", "Kringo", "Vanna"];
 let subjects = ["Math", "Science", "English"];
-let grades = [85, 72, 90];
+let grades = [85, 75, 90];
 
 class Person {
     constructor(name, age) {
