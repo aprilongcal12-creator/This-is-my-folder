@@ -9,7 +9,7 @@ let tuition = 15000;
 let subjects = 6;
 let isEnrolled = true;
 
-const studentID = "2026-001";
+const studentID = "2024-153-1";
 const semester = "First Semester";
 const department = "College of Computing";
 const adviser = "Prof. Yu";
