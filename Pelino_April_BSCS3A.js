@@ -8,12 +8,14 @@ let students = ["April", "Kringo", "Vanna"];
 let subjects = ["Math", "Science", "English"];
 let grades = [85, 75, 90];
 
+// Parent class for Person
 class Person {
     constructor(name, age) {
         this.name = name;
         this.age = age;
     }
 
+ 
     introduce() {
         return `Hello, my name is ${this.name}.`;
     }
