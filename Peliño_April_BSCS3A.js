@@ -1,3 +1,4 @@
+// Student information using variables
 let studentName = "April";
 let age = 21;
 let course = "BSCS";
