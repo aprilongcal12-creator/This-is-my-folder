@@ -3,7 +3,7 @@ let schoolName = "CCNHS";
 let schoolYear = 2026;
 let passingGrade = 75;
 
-
+// Arrays containing students, subjects, and grades
 let students = ["April", "Kringo", "Vanna"];
 let subjects = ["Math", "Science", "English"];
 let grades = [85, 75, 90];
