@@ -1,11 +1,20 @@
+// Store the name and age in variables
 const name = "April";
 const age = 21;
 
-const greet = () => Hello, ${name}!;
-const showAge = () => Age: ${age};
-const welcome = () => Welcome, ${name}!;
-const message = () => You are ${age} years old.;
+// Function that returns a greeting
+const greet = () => `Hello, ${name}!`;
 
+// Function that displays the age
+const showAge = () => `Age: ${age}`;
+
+// Function that welcomes the user
+const welcome = () => `Welcome, ${name}!`;
+
+// Function that displays a message about the user's age
+const message = () => `You are ${age} years old.`;
+
+// Display the results in the console
 console.log(greet());
 console.log(showAge());
 console.log(welcome());
