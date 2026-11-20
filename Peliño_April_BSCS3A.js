@@ -28,6 +28,7 @@ const add = (a, b) => a + b;
 const multiply = (a, b) => a * b;
 const checkGrade = (grade) => grade >= passingGrade;
 
+// Display the student's information
 console.log(`Student Name: ${studentName}`);
 console.log(`Student ID: ${studentID}`);
 console.log(`Age: ${age}`);
