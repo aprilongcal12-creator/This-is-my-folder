@@ -22,6 +22,7 @@ const currency = "PHP";
 const maxUnits = 21;
 const systemName = "NWSSU Student System";
 
+// Arrow functions for different operations
 const greet = (name) => `Hello, ${name}!`;
 const calculateBalance = (fee, payment) => fee - payment;
 const add = (a, b) => a + b;
